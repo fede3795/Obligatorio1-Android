@@ -6,7 +6,9 @@ plugins {
 android {
     namespace = "com.silverafederico.obligatorio1_android"
     compileSdk = 33
-
+    viewBinding{
+        enable = true
+    }
     defaultConfig {
         applicationId = "com.silverafederico.obligatorio1_android"
         minSdk = 24
