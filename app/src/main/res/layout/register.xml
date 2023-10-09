@@ -6,6 +6,36 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_color">
 
+    <Button
+        android:id="@+id/signBtn2"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="116dp"
+        android:layout_height="45dp"
+        android:background="@drawable/bg_color_btn"
+        android:text="Cancelar"
+        android:textSize="12sp"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/signBtn3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/whiteBackground" />
+
+    <Button
+        android:id="@+id/signBtn3"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="112dp"
+        android:layout_height="45dp"
+        android:background="@drawable/bg_color_btn"
+        android:text="Guardar"
+        android:textSize="12sp"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/signBtn2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/signBtn2"
+        app:layout_constraintTop_toTopOf="@+id/signBtn2" />
+
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="140dp"
