@@ -20,11 +20,11 @@ class LoginActivity : AppCompatActivity() {
 
         val savedCredentials = preferenceManager.getSavedCredentials()
 
-        if (savedCredentials != null) {
+        /*if (savedCredentials != null) {
             showLoginScreen(savedCredentials)
         } else {
             showRegisterScreen()
-        }
+        }*/
 
         binding.signBtn.setOnClickListener {
             val username = binding.editTextEmailInput.text.toString()
