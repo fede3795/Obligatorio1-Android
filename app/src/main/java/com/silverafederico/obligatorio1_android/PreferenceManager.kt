@@ -1,6 +1,5 @@
 package com.silverafederico.obligatorio1_android
 
-import androidx.appcompat.app.AppCompatActivity
 import android.content.Context
 import android.content.SharedPreferences
 
