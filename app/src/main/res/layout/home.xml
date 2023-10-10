@@ -19,6 +19,7 @@
         android:textColor="@color/white"
         android:textSize="23sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,8 +28,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="@android:color/transparent"
-        android:backgroundTint="@android:color/transparent"
         android:contentDescription="Buscar nota"
         android:contextClickable="true"
         android:hapticFeedbackEnabled="true"
@@ -37,11 +36,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textoNota"
-        app:navigationIconTint="@color/white"
-        app:queryBackground="@android:color/white"
-        app:strokeColor="@color/white"
-        app:strokeWidth="2dp"
-        app:subtitleTextColor="@color/white" />
+        app:navigationIconTint="@color/black"
+        app:queryBackground="@android:color/black"
+        app:strokeColor="@color/black"
+        app:strokeWidth="2dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
