@@ -4,12 +4,10 @@
         <item name="boxStrokeColor">@color/white</item>
 
     </style>
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
 
-    </style>
-    <style name="styleSearchBar" parent="Widget.Design.TextInputLayout">
+    <style name="styleSearchBar" parent="Widget.Material3.SearchView">
         <item name="editTextColor">@color/white</item>
-        <item name="hintTextColor">@color/colorGrey</item>
+        <item name="android:textColorHint">@color/colorGrey</item>
 
     </style>
 </resources>
