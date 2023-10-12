@@ -15,17 +15,21 @@ import kotlinx.serialization.json.Json
 import java.text.SimpleDateFormat
 import java.util.Date
 
+
 class HomeActivity : AppCompatActivity(), OnItemClickListen {
 
     private val preferenceManager by lazy { PreferenceManager(this) }
 
     private lateinit var binding: HomeBinding
 
+    private val noteList = mutableListOf<Note>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = HomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         val noteList = mutableListOf<Note>(
             Note("Prueba1", "descripcion1", SimpleDateFormat("dd/MM/yyyy").format(Date())),
@@ -46,5 +50,6 @@ class HomeActivity : AppCompatActivity(), OnItemClickListen {
         val intent = Intent(this,DataNoteActivity::class.java)
         intent.putExtra("item", itemJson)
         startActivity(intent)
+
     }
 }
