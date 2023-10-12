@@ -6,8 +6,19 @@
     </style>
 
     <style name="styleSearchBar" parent="Widget.Material3.SearchView">
-        <item name="editTextColor">@color/white</item>
-        <item name="android:textColorHint">@color/colorGrey</item>
+        <item name="editTextColor">#F3E5AB</item>
+        <item name="android:textColorHint">#175381</item>
 
     </style>
+
+    <style name="buttonActionStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:backgroundTint">#FFFFFF</item>
+
+
+    </style>
+
+
 </resources>

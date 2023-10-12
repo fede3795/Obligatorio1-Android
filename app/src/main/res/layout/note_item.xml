@@ -1,55 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="200dp"
+    android:layout_width="match_parent"
     android:layout_height="225dp"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <FrameLayout
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="8dp">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@color/white"/>
+        app:cardCornerRadius="26dp"
+        android:layout_margin="8dp"
+        app:cardElevation="8dp"
+        app:cardBackgroundColor="#F3E5AB">
 
         <LinearLayout
+            android:id="@+id/linearID"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/title"
+                android:id="@+id/titleID"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:gravity="center_vertical|left"
-                android:text="Titulo de la nota" />
+                android:layout_height="45dp"
+                android:text="Title"
+                android:padding="8dp"
+                android:paddingStart="12dp"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:textColor="#175381"/>
 
             <TextView
-                android:id="@+id/description"
+                android:id="@+id/descriptionID"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:gravity="left"
-                android:text="Descripción"
-                android:paddingTop="4dp"/>
-
+                android:layout_height="135dp"
+                android:text="Description"
+                android:paddingStart="8dp"
+                android:textSize="18sp"
+                android:textStyle="normal"
+                android:textColor="#175381"/>
 
             <TextView
-                android:id="@+id/date"
+                android:id="@+id/dateID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="2dp"
-                android:text="dd/MM/yy"
+                android:text="dd/MM/yyyy"
+                android:paddingTop="8dp"
+                android:paddingRight="18dp"
+                android:layout_gravity="right"
                 android:textSize="12sp"
-                android:paddingBottom="4dp"
-                android:paddingRight="4dp"
-                android:layout_gravity="right"/>
+                android:textColor="#175381"
+                android:textStyle="italic"/>
 
 
         </LinearLayout>
 
-    </FrameLayout>
+    </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
