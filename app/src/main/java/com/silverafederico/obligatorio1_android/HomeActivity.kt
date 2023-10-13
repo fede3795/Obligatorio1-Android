@@ -43,6 +43,8 @@ class HomeActivity : AppCompatActivity(), OnItemClickListen {
         binding.recyclerView.adapter = NoteAdapter(noteList,this)
         binding.recyclerView.addItemDecoration(itemDecoration)
 
+
+
     }
 
     override fun onItemClick(item: Note) {
@@ -52,4 +54,5 @@ class HomeActivity : AppCompatActivity(), OnItemClickListen {
         startActivity(intent)
 
     }
+
 }
