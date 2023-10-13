@@ -22,6 +22,20 @@
         app:srcCompat="@drawable/ic_details" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnSave"
+        style="@style/buttonActionStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionLayout"
+        app:layout_constraintVertical_bias="1.0"
+        app:shapeAppearance="@style/Widget.Material3.CircularProgressIndicator"
+        app:srcCompat="@drawable/ic_save" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnBack"
         style="@style/buttonActionStyle"
         android:layout_width="wrap_content"
@@ -45,6 +59,7 @@
         android:paddingStart="8dp"
         android:layout_margin="8dp"
         android:text="Title"
+        android:background="@null"
         android:textColor="#175381"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -58,20 +73,23 @@
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/descriptionLayout"
         android:layout_width="match_parent"
-        android:layout_height="523dp"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:background="@null"
+        android:gravity="start"
         android:paddingStart="8dp"
         android:text="Description"
         android:textColor="#175381"
         android:textSize="18sp"
         android:textStyle="normal"
-        android:gravity="start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dateLayout"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0">
+
+    </com.google.android.material.textfield.TextInputEditText>
 
     <TextView
         android:id="@+id/dateLayout"
@@ -85,4 +103,15 @@
         app:layout_constraintHorizontal_bias="0.039"
         app:layout_constraintStart_toStartOf="@+id/titleLayout"
         app:layout_constraintTop_toBottomOf="@+id/titleLayout" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewString"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionLayout"
+        tools:listitem="@layout/string_item"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
