@@ -2,10 +2,13 @@ package com.silverafederico.obligatorio1_android
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.silverafederico.obligatorio1_android.Entities.Note
 
 class PreferenceManager(context: Context) {
     private val preferences: SharedPreferences =
         context.getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE)
+
+    private val notes: SharedPreferences = context.getSharedPreferences("NotesPreferences", Context.MODE_PRIVATE)
 
     fun saveCredentials(username: String, password: String) {
         val editor = preferences.edit()
@@ -30,5 +33,9 @@ class PreferenceManager(context: Context) {
         editor.remove("username")
         editor.remove("password")
         editor.apply()
+    }
+
+    fun saveNotes(noteList: List<Note>){
+        val editor = notes.edit()
     }
 }

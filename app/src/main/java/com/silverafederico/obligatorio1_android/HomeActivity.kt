@@ -31,20 +31,24 @@ class HomeActivity : AppCompatActivity(), OnItemClickListen {
         setContentView(binding.root)
 
 
-        val noteList = mutableListOf<Note>(
-            Note("Prueba1", "descripcion1", SimpleDateFormat("dd/MM/yyyy").format(Date())),
-            Note("Prueba2", "descripcion2", SimpleDateFormat("dd/MM/yyyy").format(Date())),
-        )
+        val noteList = getNotes()
 
 
         val itemDecoration = DividerItemDecoration(binding.recyclerView.context, LinearLayoutManager(this).orientation)
 
         binding.recyclerView.layoutManager = GridLayoutManager(this,2, LinearLayoutManager.VERTICAL,false)
-        binding.recyclerView.adapter = NoteAdapter(noteList,this)
-        binding.recyclerView.addItemDecoration(itemDecoration)
 
 
+        binding.addButton.setOnClickListener {
+            noteList.add(Note("Title", "Description", SimpleDateFormat("dd/MM/yyyy").format(Date())))
+            binding.recyclerView.adapter = NoteAdapter(noteList,this)
+            binding.recyclerView.addItemDecoration(itemDecoration)
+        }
 
+    }
+
+    fun getNotes(): MutableList<Note> {
+        return noteList;
     }
 
     override fun onItemClick(item: Note) {
