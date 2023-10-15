@@ -25,6 +25,7 @@ class DataNoteActivity : AppCompatActivity() {
             onBackPressed()
         }
 
+
     }
 
     private fun saveNote() {

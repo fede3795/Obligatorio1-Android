@@ -113,5 +113,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descriptionLayout"
+        android:visibility="invisible"
         tools:listitem="@layout/string_item"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
