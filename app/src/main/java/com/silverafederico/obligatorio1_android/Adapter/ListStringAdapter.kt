@@ -10,7 +10,7 @@ import java.text.FieldPosition
 interface OnItemStringClickListen{
     fun onItemClick(item: String)
 }
-class ListStringAdapter(private val list:List<String>,private val onItemStringClickListen:OnItemStringClickListen): RecyclerView.Adapter<ListStringAdapter.StringViewHolder()>{
+class ListStringAdapter(private val list: List<String>,private val onItemStringClickListen:OnItemStringClickListen): RecyclerView.Adapter<ListStringAdapter.StringViewHolder>(){
     inner class StringViewHolder(val binding: StringItemBinding): RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup,viewType: Int):StringViewHolder{
