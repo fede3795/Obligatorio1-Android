@@ -1,10 +1,8 @@
 package com.silverafederico.obligatorio1_android
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.silverafederico.obligatorio1_android.Entities.Note
-import com.silverafederico.obligatorio1_android.databinding.ActivityDataNoteBinding
 import com.silverafederico.obligatorio1_android.databinding.DataNoteBinding
 import kotlinx.serialization.json.Json
 
@@ -23,10 +21,6 @@ class DataNoteActivity : AppCompatActivity() {
         binding.dateLayout.setText("${item?.date}")
         binding.btnBack.setOnClickListener {
             onBackPressed()
-        }
-
-        binding.deleteBtn.setOnClickListener {
-
         }
 
     }
