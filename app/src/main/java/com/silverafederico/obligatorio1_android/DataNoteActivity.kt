@@ -25,6 +25,10 @@ class DataNoteActivity : AppCompatActivity() {
             onBackPressed()
         }
 
+        binding.deleteBtn.setOnClickListener {
+
+        }
+
     }
 
     private fun saveNote() {
@@ -32,4 +36,5 @@ class DataNoteActivity : AppCompatActivity() {
         note?.description = binding.descriptionLayout.text.toString()
         note?.date = binding.dateLayout.text.toString()
     }
+
 }

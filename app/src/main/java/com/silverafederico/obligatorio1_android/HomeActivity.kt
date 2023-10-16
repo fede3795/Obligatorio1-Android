@@ -51,6 +51,10 @@ class HomeActivity : AppCompatActivity(), OnItemClickListen {
         return noteList;
     }
 
+    fun deleteNote(){
+
+    }
+
     override fun onItemClick(item: Note) {
         val itemJson = Json.encodeToString(item)
         val intent = Intent(this,DataNoteActivity::class.java)
