@@ -48,4 +48,8 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
+    implementation("androidx.appcompat:appcompat:1.3.1")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.1")
+    implementation("com.google.android.material:material:1.4.0")
+
 }

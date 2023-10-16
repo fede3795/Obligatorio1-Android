@@ -40,7 +40,7 @@
         app:navigationIconTint="@color/black"
         app:queryBackground="@android:color/black"
         app:strokeColor="@color/colorGrey"
-        app:strokeWidth="2dp"/>
+        app:strokeWidth="2dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -50,18 +50,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchView"
-        tools:listitem="@layout/note_item"
-        />
+        tools:listitem="@layout/note_item" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addButton"
-        android:src="@drawable/ic_add"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:shapeAppearance="@style/Widget.Material3.CircularProgressIndicator"
-        app:backgroundTint="@color/white"
+        style="@style/buttonActionStyle"
         android:layout_marginBottom="26dp"
         android:contentDescription="Agregar nota"
-        style="@style/buttonActionStyle" />
+        android:src="@drawable/ic_add"
+        app:backgroundTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/recyclerView"
+        app:layout_constraintStart_toEndOf="@+id/deleteAllBtn"
+        app:shapeAppearance="@style/Widget.Material3.CircularProgressIndicator" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/deleteAllBtn"
+        style="@style/buttonActionStyle"
+        android:contentDescription="Eliminar todas las notas"
+        android:src="@drawable/ic_delete"
+        app:backgroundTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/addButton"
+        app:layout_constraintEnd_toStartOf="@+id/addButton"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/addButton"
+        app:shapeAppearance="@style/Widget.Material3.CircularProgressIndicator" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

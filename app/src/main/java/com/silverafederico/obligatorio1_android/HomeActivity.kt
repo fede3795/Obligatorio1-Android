@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
@@ -24,6 +26,7 @@ class HomeActivity : AppCompatActivity(), OnItemClickListen {
     private lateinit var binding: HomeBinding
     private val noteList = mutableListOf<Note>()
     private lateinit var noteAdapter: NoteAdapter
+    private lateinit var deleteAllConfirmationDialog: AlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +43,10 @@ class HomeActivity : AppCompatActivity(), OnItemClickListen {
 
         binding.addButton.setOnClickListener {
             addNewNote()
+        }
+
+        binding.deleteAllBtn.setOnClickListener {
+            showDeleteAllConfirmationDialog()
         }
     }
 
@@ -146,6 +153,39 @@ class HomeActivity : AppCompatActivity(), OnItemClickListen {
 
     companion object {
         const val REQUEST_CODE = 1
+    }
+
+    private fun showDeleteAllConfirmationDialog() {
+        val builder = AlertDialog.Builder(this)
+        val inflater = layoutInflater
+        val dialogView = inflater.inflate(R.layout.dialog_alert, null)
+        builder.setView(dialogView)
+        val dialog = builder.create()
+
+        val confirmButton = dialogView.findViewById<Button>(R.id.confirmBtn)
+        val cancelButton = dialogView.findViewById<Button>(R.id.CancelBtn)
+
+        confirmButton.setOnClickListener {
+            deleteAllNotes()
+            dialog.dismiss()
+        }
+
+        cancelButton.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+
+    }
+
+    private fun deleteAllNotes() {
+        noteList.clear()
+        noteAdapter.notifyDataSetChanged()
+
+        val sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.remove("notes")
+        editor.apply()
     }
 
 }

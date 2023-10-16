@@ -5,4 +5,5 @@
     <color name="colorGrey">#CDCBCB</color>
     <color name="Gunmetal">#5B6065</color>
     <color name="White">#FFFFFF</color>
+    <color name="colorPrimary">#FF5722</color>
 </resources>

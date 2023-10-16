@@ -68,8 +68,9 @@ class DataNoteActivity : AppCompatActivity() {
     }
 
     private fun saveNoteAndReturnToHome() {
-        note?.title = binding.titleLayout.text.toString()
-        note?.description = binding.descriptionLayout.text.toString()
+        note.title = binding.titleLayout.text.toString()
+        note.description = binding.descriptionLayout.text.toString()
+        note.date = SimpleDateFormat("dd/MM/yyyy").format(Date())
 
         val sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
