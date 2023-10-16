@@ -1,6 +1,7 @@
 package com.silverafederico.obligatorio1_android
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -20,21 +21,17 @@ class LoginActivity : AppCompatActivity() {
 
         val savedCredentials = preferenceManager.getSavedCredentials()
 
-        /*if (savedCredentials != null) {
-            showLoginScreen(savedCredentials)
-        } else {
-            showRegisterScreen()
-        }*/
-
         binding.signBtn.setOnClickListener {
             val username = binding.editTextEmailInput.text.toString()
             val password = binding.editTextPasswordInput.text.toString()
 
-            if (isValidCredentials(username, password)) {
-                preferenceManager.saveCredentials(username, password)
-                showLoginScreen(Pair(username, password))
+            val userPreferences = getSharedPreferences("User_$username", MODE_PRIVATE)
+
+            if (isValidCredentials(username, password, userPreferences)) {
+                preferenceManager.saveCredentials(username, password, userPreferences)
+                showHomeScreen(username)
             } else {
-                Toast.makeText(this, "Wrong credentials", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -43,18 +40,23 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun showLoginScreen(credentials: Pair<String, String>) {
+    private fun showHomeScreen(username: String) {
         val intent = Intent(this, HomeActivity::class.java)
-        intent.putExtra("credentials", credentials)
+        intent.putExtra("username", username)
         startActivity(intent)
+        finish()
     }
+
 
     private fun showRegisterScreen() {
         val intent = Intent(this, RegisterActivity::class.java)
         startActivity(intent)
     }
 
-    private fun isValidCredentials(username: String, password: String): Boolean {
-        return (username == "usuario" && password == "contraseña")
+    private fun isValidCredentials(username: String, password: String, userPreferences: SharedPreferences): Boolean {
+        val savedUsername = userPreferences.getString("email", null)
+        val savedPassword = userPreferences.getString("password", null)
+
+        return (username == savedUsername && password == savedPassword)
     }
 }

@@ -7,13 +7,18 @@ import com.silverafederico.obligatorio1_android.Entities.Note
 class PreferenceManager(context: Context) {
     private val preferences: SharedPreferences =
         context.getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE)
+    private val PREF_NAME = "MyAppPreferences"
+    private val PREF_KEY_USERNAME = "username"
+    private val PREF_KEY_PASSWORD = "password"
 
-    private val notes: SharedPreferences = context.getSharedPreferences("NotesPreferences", Context.MODE_PRIVATE)
+    private val context: Context = context
 
-    fun saveCredentials(username: String, password: String) {
-        val editor = preferences.edit()
-        editor.putString("username", username)
-        editor.putString("password", password)
+    private val sharedPreferences: SharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+
+    fun saveCredentials(username: String, password: String, userPreferences: SharedPreferences) {
+        val editor = userPreferences.edit()
+        editor.putString(PREF_KEY_USERNAME, username)
+        editor.putString(PREF_KEY_PASSWORD, password)
         editor.apply()
     }
 
@@ -28,14 +33,11 @@ class PreferenceManager(context: Context) {
         }
     }
 
-    fun clearCredentials() {
-        val editor = preferences.edit()
-        editor.remove("username")
-        editor.remove("password")
+    fun clearCredentials(username: String) {
+        val sharedPreferences = context.getSharedPreferences("User_$username", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.clear()
         editor.apply()
     }
 
-    fun saveNotes(noteList: List<Note>){
-        val editor = notes.edit()
-    }
 }

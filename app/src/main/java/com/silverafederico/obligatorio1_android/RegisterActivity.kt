@@ -37,8 +37,8 @@ class RegisterActivity : AppCompatActivity() {
         val repeatPassword = binding.editTextRepeatPassword.text.toString()
 
         if (isValidRegistrationData(password, repeatPassword)) {
-            val sharedPreferences = getSharedPreferences("LoginPreferences", MODE_PRIVATE)
-            val editor = sharedPreferences.edit()
+            val userPreferences = getSharedPreferences("User_$email", MODE_PRIVATE)
+            val editor = userPreferences.edit()
 
             editor.putString("name", name)
             editor.putString("lastname", lastname)
@@ -46,9 +46,10 @@ class RegisterActivity : AppCompatActivity() {
             editor.putString("password", password)
 
             editor.apply()
+
             showLoginScreen()
         } else {
-            Toast.makeText(this, "Invalid registration data", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Datos de registro inválidos", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -60,7 +61,11 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun showLoginScreen() {
-        val intent = Intent(this, HomeActivity::class.java)
+        val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
+        finish()
     }
+
+
+
 }

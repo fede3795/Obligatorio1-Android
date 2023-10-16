@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -26,13 +27,20 @@ class HomeActivity : AppCompatActivity(), OnItemClickListen {
     private lateinit var binding: HomeBinding
     private val noteList = mutableListOf<Note>()
     private lateinit var noteAdapter: NoteAdapter
-    private lateinit var deleteAllConfirmationDialog: AlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = HomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val username = intent.getStringExtra("username")
+        if (username == null) {
+            Toast.makeText(this, "Error: Nombre de usuario no proporcionado", Toast.LENGTH_SHORT).show()
+            finish()
+        }
+
+        val userPreferences = getSharedPreferences("User_$username", MODE_PRIVATE)
 
         val itemDecoration = DividerItemDecoration(binding.recyclerView.context, LinearLayoutManager(this).orientation)
         binding.recyclerView.layoutManager = GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false)
@@ -41,12 +49,18 @@ class HomeActivity : AppCompatActivity(), OnItemClickListen {
         binding.recyclerView.adapter = noteAdapter
         binding.recyclerView.addItemDecoration(itemDecoration)
 
+
+
         binding.addButton.setOnClickListener {
             addNewNote()
         }
 
         binding.deleteAllBtn.setOnClickListener {
             showDeleteAllConfirmationDialog()
+        }
+
+        binding.logoutBtn.setOnClickListener {
+            logout()
         }
     }
 
@@ -56,17 +70,20 @@ class HomeActivity : AppCompatActivity(), OnItemClickListen {
     }
 
     private fun loadNotesFromSharedPreferences() {
-        val sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        val notesJson = sharedPreferences.getString("notes", null)
+        val username = intent.getStringExtra("username")
+        if (username != null) {
+            val userPreferences = getSharedPreferences("User_$username", MODE_PRIVATE)
+            val notesJson = userPreferences.getString("notes", null)
 
-        if (notesJson != null) {
-            val notes: List<Note> = Json.decodeFromString(notesJson)
+            if (notesJson != null) {
+                val notes: List<Note> = Json.decodeFromString(notesJson)
 
-            noteList.clear()
+                noteList.clear()
 
-            noteList.addAll(notes)
+                noteList.addAll(notes)
 
-            noteAdapter.notifyDataSetChanged()
+                noteAdapter.notifyDataSetChanged()
+            }
         }
     }
 
@@ -144,11 +161,14 @@ class HomeActivity : AppCompatActivity(), OnItemClickListen {
     }
 
     private fun saveNotesToSharedPreferences() {
-        val sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        val notesJson = Json.encodeToString(noteList)
-        val editor = sharedPreferences.edit()
-        editor.putString("notes", notesJson)
-        editor.apply()
+        val username = intent.getStringExtra("username")
+        if (username != null) {
+            val userPreferences = getSharedPreferences("User_$username", MODE_PRIVATE)
+            val notesJson = Json.encodeToString(noteList)
+            val editor = userPreferences.edit()
+            editor.putString("notes", notesJson)
+            editor.apply()
+        }
     }
 
     companion object {
@@ -186,6 +206,20 @@ class HomeActivity : AppCompatActivity(), OnItemClickListen {
         val editor = sharedPreferences.edit()
         editor.remove("notes")
         editor.apply()
+    }
+
+    private fun logout() {
+        val username = intent.getStringExtra("username")
+        if (username != null) {
+            val userPreferences = getSharedPreferences("User_$username", MODE_PRIVATE)
+            val editor = userPreferences.edit()
+            editor.clear()
+            editor.apply()
+        }
+
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
 }
