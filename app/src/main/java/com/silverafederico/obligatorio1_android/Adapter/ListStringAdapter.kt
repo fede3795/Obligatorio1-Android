@@ -4,21 +4,16 @@ import android.text.Editable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.silverafederico.obligatorio1_android.Entities.Note
 import com.silverafederico.obligatorio1_android.databinding.StringItemBinding
-import java.text.FieldPosition
 
 interface OnItemStringClickListen{
     fun onItemClick(item: String)
 }
-class ListStringAdapter(private val list: List<String>,private val onItemStringClickListen:OnItemStringClickListen): RecyclerView.Adapter<ListStringAdapter.StringViewHolder>(){
-    inner class StringViewHolder(val binding: StringItemBinding): RecyclerView.ViewHolder(binding.root)
+class ListStringAdapter(private val list: List<String>, private val onItemStringClickListen: (Any) -> Unit): RecyclerView.Adapter<ListStringAdapter.StringViewHolder>(){
+    inner class StringViewHolder(val binding: StringItemBinding) : RecyclerView.ViewHolder(binding.root)
 
-    interface OnItemStringClickListen {
-        fun onItemClick(item: String)
-    }
 
-    override fun onCreateViewHolder(parent: ViewGroup,viewType: Int):StringViewHolder{
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StringViewHolder {
         val binding = StringItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return StringViewHolder(binding)
     }
@@ -33,8 +28,9 @@ class ListStringAdapter(private val list: List<String>,private val onItemStringC
             val editableItem: Editable = Editable.Factory.getInstance().newEditable(item)
             editText.text = editableItem
             root.setOnClickListener {
-                onItemStringClickListen.onItemClick(item)
+                onItemStringClickListen(item)
             }
         }
     }
+
 }

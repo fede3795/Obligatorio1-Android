@@ -36,11 +36,9 @@ class HomeActivity : AppCompatActivity(), OnItemClickListen {
 
         val username = intent.getStringExtra("username")
         if (username == null) {
-            Toast.makeText(this, "Error: Nombre de usuario no proporcionado", Toast.LENGTH_SHORT).show()
             finish()
         }
 
-        val userPreferences = getSharedPreferences("User_$username", MODE_PRIVATE)
 
         val itemDecoration = DividerItemDecoration(binding.recyclerView.context, LinearLayoutManager(this).orientation)
         binding.recyclerView.layoutManager = GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false)
@@ -89,13 +87,50 @@ class HomeActivity : AppCompatActivity(), OnItemClickListen {
 
 
     private fun addNewNote() {
-        val newNote = Note(UUID.randomUUID().toString(), "Title", "Description", SimpleDateFormat("dd/MM/yyyy").format(Date()))
+        val dialog = AlertDialog.Builder(this)
+        dialog.setTitle("Seleccione el tipo de nota")
+        val noteTypes = arrayOf("Texto simple", "Lista")
+        dialog.setItems(noteTypes) { _, which ->
+            when (which) {
+                0 -> addNewSimpleNote()
+                1 -> addNewListNote()
+            }
+        }
+        dialog.show()
+    }
+
+    private fun addNewSimpleNote() {
+        val newNote = Note(
+            UUID.randomUUID().toString(),
+            "Title",
+            "Description",
+            SimpleDateFormat("dd/MM/yyyy").format(Date()),
+            false,
+            mutableListOf()
+        )
         noteList.add(newNote)
 
         noteAdapter.notifyDataSetChanged()
 
         saveNotesToSharedPreferences()
     }
+
+    private fun addNewListNote() {
+        val newNote = Note(
+            UUID.randomUUID().toString(),
+            "Title",
+            "Description",
+            SimpleDateFormat("dd/MM/yyyy").format(Date()),
+            true,
+            mutableListOf()
+        )
+        noteList.add(newNote)
+
+        noteAdapter.notifyDataSetChanged()
+
+        saveNotesToSharedPreferences()
+    }
+
 
 
     override fun onItemClick(item: Note) {
@@ -202,21 +237,10 @@ class HomeActivity : AppCompatActivity(), OnItemClickListen {
         noteList.clear()
         noteAdapter.notifyDataSetChanged()
 
-        val sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.remove("notes")
-        editor.apply()
+        saveNotesToSharedPreferences()
     }
 
     private fun logout() {
-        val username = intent.getStringExtra("username")
-        if (username != null) {
-            val userPreferences = getSharedPreferences("User_$username", MODE_PRIVATE)
-            val editor = userPreferences.edit()
-            editor.clear()
-            editor.apply()
-        }
-
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish()
